@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pomodoro Timer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 to-purple-800 min-h-screen flex items-center justify-center font-sans text-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden p-8">
+            <h1 class="text-3xl font-bold text-center mb-6">Login</h1>
+            
+            <!-- Alert Messages -->
+            <div th:if="${param.error}" class="bg-red-500/30 border border-red-400 text-white px-4 py-3 rounded mb-4">
+                Invalid username or password.
+            </div>
+            <div th:if="${param.logout}" class="bg-green-500/30 border border-green-400 text-white px-4 py-3 rounded mb-4">
+                You have been logged out.
+            </div>
+            <div th:if="${param.registered}" class="bg-green-500/30 border border-green-400 text-white px-4 py-3 rounded mb-4">
+                Registration successful! Please login.
+            </div>
+            
+            <!-- Login Form -->
+            <form th:action="@{/login}" method="post" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium mb-1">Username</label>
+                    <input type="text" id="username" name="username" required 
+                           class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white">
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                    <input type="password" id="password" name="password" required 
+                           class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember-me" name="remember-me" 
+                           class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                    <label for="remember-me" class="ml-2 block text-sm text-white">
+                        Remember me
+                    </label>
+                </div>
+                
+                <div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        Login
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p>Don't have an account? <a href="/register" class="text-indigo-300 hover:text-indigo-200">Register here</a></p>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="/" class="text-indigo-300 hover:text-indigo-200">
+                    &larr; Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

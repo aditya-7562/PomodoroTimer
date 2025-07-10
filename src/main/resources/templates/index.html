@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js for audio feedback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 to-purple-800 min-h-screen flex items-center justify-center font-sans text-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden p-8">
+            <h1 class="text-4xl font-bold text-center mb-6">Pomodoro Timer</h1>
+            
+            <!-- Timer Display -->
+            <div class="text-center">
+                <h2 id="session-type" class="text-2xl font-bold mb-4">Focus Session</h2>
+                <div id="timer" class="timer-display text-8xl font-bold mb-6">25:00</div>
+                
+                <!-- Timer Controls -->
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button id="start-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                        Start
+                    </button>
+                    <button id="reset-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                        Reset
+                    </button>
+                </div>
+                
+                <!-- Session Counter -->
+                <div class="mb-6">
+                    <p class="text-lg mb-2">Pomodoros: <span id="pomodoro-count">0</span></p>
+                </div>
+                
+                <!-- Timer Settings -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="focus-time" class="block text-sm font-medium mb-1">Focus Time (min)</label>
+                        <input type="number" id="focus-time" value="25" min="1" max="60" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white">
+                    </div>
+                    <div>
+                        <label for="break-time" class="block text-sm font-medium mb-1">Break Time (min)</label>
+                        <input type="number" id="break-time" value="5" min="1" max="30" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white">
+                    </div>
+                </div>
+                
+                <!-- User Account Options -->
+                <div class="mt-8 pt-6 border-t border-white/20">
+                    <h3 class="text-xl font-semibold mb-4">Want more features?</h3>
+                    <p class="mb-4">Create an account to track your progress, customize settings, and more!</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="/login" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Login
+                        </a>
+                        <a href="/register" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Register
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script src="/js/script.js"></script>
+</body>
+</html>

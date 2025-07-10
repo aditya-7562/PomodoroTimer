@@ -1,0 +1,64 @@
+# === Build output ===
+/target/
+
+# === Maven wrapper binaries ===
+.mvn/wrapper/maven-wrapper.jar
+
+# === IDEs ===
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# === Logs ===
+*.log
+logs/
+spring.log
+
+# === OS/System files ===
+.DS_Store
+Thumbs.db
+
+# === Environment & config ===
+.env
+*.env
+
+# === Database files ===
+pomodoro.db
+
+# === Test reports & coverage ===
+*.exec
+jacoco.exec
+coverage/
+surefire-reports/
+test-output/
+
+# === Generated sources ===
+/target/generated-sources/
+/target/generated-test-sources/
+
+/target/maven-status/
+/target/test-classes/
+
+/target/classes/application.properties
+/target/classes/application-prod.properties
+
+# === Others (optional) ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === Exclude compiled frontend files if any ===
+# public/
+# dist/

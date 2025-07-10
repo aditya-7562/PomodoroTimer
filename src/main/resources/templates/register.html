@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Pomodoro Timer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 to-purple-800 min-h-screen flex items-center justify-center font-sans text-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden p-8">
+            <h1 class="text-3xl font-bold text-center mb-6">Create Account</h1>
+            
+            <!-- Registration Form -->
+            <form th:action="@{/register}" method="post" th:object="${userRegistrationDto}" class="space-y-4">
+                <!-- Username Field -->
+                <div>
+                    <label for="username" class="block text-sm font-medium mb-1">Username</label>
+                    <input type="text" id="username" th:field="*{username}" required 
+                           class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
+                           minlength="3" maxlength="20">
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" 
+                       class="mt-1 text-sm text-red-400"></p>
+                </div>
+                
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                    <input type="email" id="email" th:field="*{email}" required 
+                           class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white">
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" 
+                       class="mt-1 text-sm text-red-400"></p>
+                </div>
+                
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                    <input type="password" id="password" th:field="*{password}" required 
+                           class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
+                           minlength="6">
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" 
+                       class="mt-1 text-sm text-red-400"></p>
+                </div>
+                
+                <!-- Confirm Password Field -->
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-medium mb-1">Confirm Password</label>
+                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}" required 
+                           class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white">
+                    <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" 
+                       class="mt-1 text-sm text-red-400"></p>
+                </div>
+                
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        Register
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p>Already have an account? <a href="/login" class="text-indigo-300 hover:text-indigo-200">Login here</a></p>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="/" class="text-indigo-300 hover:text-indigo-200">
+                    &larr; Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

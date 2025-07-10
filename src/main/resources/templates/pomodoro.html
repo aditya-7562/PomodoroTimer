@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js for audio feedback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 to-purple-800 min-h-screen font-sans text-white">
+    <!-- Navigation Bar -->
+    <nav class="bg-white/10 backdrop-blur-lg shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold">Pomodoro Timer</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="/user/dashboard" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Dashboard
+                        </a>
+                        <a href="/pomodoro" class="border-indigo-500 text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Timer
+                        </a>
+                        <a href="/user/settings" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Settings
+                        </a>
+                        <a href="/user/profile" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Profile
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <div class="ml-3 relative">
+                        <div class="flex items-center">
+                            <span class="mr-4" th:text="${user.username}"></span>
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1 px-3 rounded-lg transition duration-300">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Icon when menu is closed -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state -->
+        <div class="sm:hidden hidden mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/user/dashboard" class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                <a href="/pomodoro" class="bg-indigo-800 text-white block px-3 py-2 rounded-md text-base font-medium">Timer</a>
+                <a href="/user/settings" class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Settings</a>
+                <a href="/user/profile" class="text-gray-300 hover:bg-indigo-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Profile</a>
+                <form th:action="@{/logout}" method="post" class="mt-3">
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col items-center justify-center">
+            <!-- Timer Display -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 mb-8 w-full max-w-md">
+                <div class="text-center">
+                    <h2 id="session-type" class="text-2xl font-bold mb-4">Focus Session</h2>
+                    <div id="timer" class="timer-display text-8xl font-bold mb-6">25:00</div>
+                    
+                    <!-- Task Description Input -->
+                    <div class="mb-6">
+                        <label for="task-description" class="block text-sm font-medium mb-1">What are you working on?</label>
+                        <input type="text" id="task-description" 
+                               class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
+                               placeholder="Enter task description...">
+                    </div>
+                    
+                    <!-- Timer Controls -->
+                    <div class="flex justify-center space-x-4">
+                        <button id="start-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Start
+                        </button>
+                        <button id="reset-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Session Counter -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-4 mb-8 w-full max-w-md">
+                <div class="flex justify-between items-center">
+                    <span class="text-lg">Pomodoros Today:</span>
+                    <span id="pomodoro-count" class="text-lg font-bold">0</span>
+                </div>
+                <div class="mt-2">
+                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                        <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between mt-1 text-sm text-gray-300">
+                        <span>0</span>
+                        <span id="daily-target" th:text="${user.dailyTarget}">8</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Session Notes -->
+            <div id="notes-container" class="bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-4 mb-8 w-full max-w-md hidden">
+                <h3 class="text-xl font-bold mb-2">Session Notes</h3>
+                <textarea id="session-notes" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white h-32" 
+                          placeholder="Add notes about this session..."></textarea>
+                <button id="save-notes-btn" class="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-1 px-4 rounded-lg transition duration-300">
+                    Save Notes
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script th:inline="javascript">
+        // Get user settings from Thymeleaf
+        const userSettings = {
+            focusDurationMinutes: /*[[${user.focusDuration}]]*/ 25,
+            shortBreakDurationMinutes: /*[[${user.breakDuration}]]*/ 5,
+            longBreakDurationMinutes: /*[[${user.longBreakDuration}]]*/ 15,
+            pomodorosUntilLongBreak: /*[[${user.pomodorosUntilLongBreak}]]*/ 4,
+            autoStartBreaks: /*[[${user.autoStartBreaks}]]*/ false,
+            autoStartPomodoros: /*[[${user.autoStartPomodoros}]]*/ false,
+            dailyPomodoroTarget: /*[[${user.dailyTarget}]]*/ 8
+        };
+        
+        // Get today's completed pomodoro count
+        let todayCompletedPomodoros = /*[[${todayCompletedSessions}]]*/ 0;
+    </script>
+    
+    <!-- Custom JavaScript -->
+    <script src="/js/pomodoro-script.js"></script>
+</body>
+</html>
