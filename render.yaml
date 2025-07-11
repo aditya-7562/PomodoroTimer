@@ -4,7 +4,6 @@ services:
     env: docker
     branch: main
     buildCommand: "./mvnw clean install"
-    startCommand: "./mvnw spring-boot:run -Dspring.profiles.active=prod"
     plan: free
     envVars:
       - key: SPRING_PROFILES_ACTIVE
