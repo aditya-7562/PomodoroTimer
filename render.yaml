@@ -1,7 +1,7 @@
 services:
   - type: web
     name: PomodoroTimer
-    env: java
+    env: docker
     branch: main
     buildCommand: "./mvnw clean install"
     startCommand: "./mvnw spring-boot:run -Dspring.profiles.active=prod"
