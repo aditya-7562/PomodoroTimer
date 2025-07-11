@@ -9,7 +9,7 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: JDBC_DATABASE_URL
-        value: postgresql://admin:YE9ASXW6C2QaOrlTaklh5WZhWqnb3uPP@dpg-d1ocivur433s73c6fan0-a/pomodoro_j2z0
+        value: jdbc:postgresql://dpg-d1ocivur433s73c6fan0-a.oregon-postgres.render.com:5432/pomodoro_j2z0
       - key: JDBC_DATABASE_USERNAME
         value: admin
       - key: JDBC_DATABASE_PASSWORD
