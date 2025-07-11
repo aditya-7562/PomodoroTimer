@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: PomodoroTimer
+    env: java
+    branch: main
+    buildCommand: "./mvnw clean install"
+    startCommand: "./mvnw spring-boot:run -Dspring.profiles.active=prod"
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JDBC_DATABASE_URL
+        value: jdbc:postgresql://admin:YE9ASXW6C2QaOrlTaklh5WZhWqnb3uPP@dpg-d1ocivur433s73c6fan0-a/pomodoro_j2z0
+      - key: JDBC_DATABASE_USERNAME
+        value: admin
+      - key: JDBC_DATABASE_PASSWORD
+        value: YE9ASXW6C2QaOrlTaklh5WZhWqnb3uPP
