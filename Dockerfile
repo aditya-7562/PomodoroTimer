@@ -8,6 +8,9 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
+# ✅ Make the mvnw script executable
+RUN chmod +x mvnw
+
 # Build dependencies first to leverage Docker cache
 RUN ./mvnw dependency:go-offline
 
