@@ -25,9 +25,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
-                .requestMatchers("/pomodoro/start").authenticated() 
+                .requestMatchers("/pomodoro/start").permitAll() 
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
