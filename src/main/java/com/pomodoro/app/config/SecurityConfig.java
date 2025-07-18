@@ -27,6 +27,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
+                .requestMatchers("/pomodoro/start").authenticated() 
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
