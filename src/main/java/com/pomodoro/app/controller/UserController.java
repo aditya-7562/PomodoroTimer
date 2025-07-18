@@ -34,18 +34,18 @@ public class UserController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User appUser = (User) authentication.getPrincipal();
         
         // Get today's completed focus sessions count
-        Long todayCompletedSessions = sessionService.countCompletedFocusSessionsToday(user);
+        Long todayCompletedSessions = sessionService.countCompletedFocusSessionsToday(appUser);
         
         // Get recent sessions
-        List<PomodoroSession> recentSessions = sessionService.getRecentSessions(user);
+        List<PomodoroSession> recentSessions = sessionService.getRecentSessions(appUser);
         
         // Get sessions for the last 7 days
         LocalDate today = LocalDate.now();
         LocalDate sevenDaysAgo = today.minusDays(6);
-        List<PomodoroSession> weekSessions = sessionService.getUserSessionsByDateRange(user, sevenDaysAgo, today);
+        List<PomodoroSession> weekSessions = sessionService.getUserSessionsByDateRange(appUser, sevenDaysAgo, today);
         
         // Calculate today's focus time (in minutes)
         int todayFocusTime = 0;
@@ -72,8 +72,8 @@ public class UserController {
         
         // Calculate daily target percentage
         double dailyTargetPercentage = 0;
-        if (user.getDailyTarget() > 0) {
-            dailyTargetPercentage = (todayCompletedSessions * 100.0) / user.getDailyTarget();
+        if (appUser.getDailyTarget() > 0) {
+            dailyTargetPercentage = (todayCompletedSessions * 100.0) / appUser.getDailyTarget();
             if (dailyTargetPercentage > 100) {
                 dailyTargetPercentage = 100;
             }
@@ -99,7 +99,7 @@ public class UserController {
             weeklyData[i] = dailyMinutes;
         }
         
-        model.addAttribute("user", user);
+        model.addAttribute("user", appUser);
         model.addAttribute("todayCompletedSessions", todayCompletedSessions);
         model.addAttribute("todayFocusTime", todayFocusTime);
         model.addAttribute("weeklyFocusTime", weeklyFocusTime);

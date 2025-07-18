@@ -159,16 +159,16 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-600">
-                        <tr th:each="session : ${recentSessions}" th:class="${session.completed ? '' : 'text-gray-400'}">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm" th:text="${#temporals.format(session.startTime, 'MMM dd, HH:mm')}">May 10, 14:30</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm" th:text="${session.sessionType}">FOCUS</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm" th:text="${session.durationMinutes} + ' min'">25 min</td>
-                            <td class="px-6 py-4 text-sm" th:text="${session.taskDescription ?: '-'}">Project work</td>
+                        <tr th:each="s : ${recentSessions}" th:class="${s.completed ? '' : 'text-gray-400'}">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" th:text="${#temporals.format(s.startTime, 'MMM dd, HH:mm')}">May 10, 14:30</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" th:text="${s.sessionType}">FOCUS</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm" th:text="${s.durationMinutes} + ' min'">25 min</td>
+                            <td class="px-6 py-4 text-sm" th:text="${s.taskDescription ?: '-'}">Project work</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                <span th:if="${session.completed}" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                <span th:if="${s.completed}" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     Completed
                                 </span>
-                                <span th:unless="${session.completed}" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                <span th:unless="${s.completed}" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                     In Progress
                                 </span>
                             </td>
