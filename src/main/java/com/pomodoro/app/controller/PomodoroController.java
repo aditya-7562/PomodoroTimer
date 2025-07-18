@@ -44,6 +44,9 @@ public class PomodoroController {
             @RequestParam(required = false) String taskDescription,
             Authentication authentication) {
         
+        // ✅ Log authentication info for debugging
+        System.out.println("Authentication = " + authentication);
+
         User user = (User) authentication.getPrincipal();
         PomodoroSession session = sessionService.startSession(user, sessionType, taskDescription);
         
