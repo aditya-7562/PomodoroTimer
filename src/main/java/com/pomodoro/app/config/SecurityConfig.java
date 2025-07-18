@@ -28,7 +28,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
-                .requestMatchers("/pomodoro/start").permitAll() 
+                .requestMatchers("/pomodoro/start").authenticated() 
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
