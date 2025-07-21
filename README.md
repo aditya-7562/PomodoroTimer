@@ -61,7 +61,7 @@ Pomodoro Timer is a web-based productivity application that implements the Pomod
 
 1. **Clone the repository** (if using Git):
    ```
-   git clone <repository-url>
+   git clone <https://github.com/aditya-7562/PomodoroTimer.git>
    cd pomodoro_prod
    ```
 
