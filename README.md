@@ -1,7 +1,7 @@
 # Pomodoro Timer Web Application
 
 ## Overview
-Pomodoro Timer is a web-based productivity application that implements the Pomodoro Technique - a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. This application helps users manage their work sessions, track productivity, and maintain focus.
+Pomodoro Timer is a web-based productivity application that implements the Pomodoro Technique. This time management method uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. This application helps users manage their work sessions, track productivity, and maintain focus.
 
 ## Features
 - **Customizable Timer**: Focus sessions (25 minutes) and break sessions
@@ -61,7 +61,7 @@ Pomodoro Timer is a web-based productivity application that implements the Pomod
 
 1. **Clone the repository** (if using Git):
    ```
-   git clone <https://github.com/aditya-7562/PomodoroTimer.git>
+   git clone https://github.com/aditya-7562/PomodoroTimer.git
    cd pomodoro_prod
    ```
 
